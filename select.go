@@ -28,7 +28,7 @@ func (s Sqle) SelectExists(query string, args []interface{}, dest []interface{})
 		if rlbErr == nil {
 			return false, err
 		}
-		return false, fmt.Errorf("sqle.SelectExists: multiple errors occured: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
+		return false, fmt.Errorf("sqle.SelectExists: multiple errors occurred: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
 	}
 
 	err = tx.Commit()
@@ -90,7 +90,7 @@ func (s Sqle) SelectRange(query string, args []interface{}, dest []interface{}, 
 			return err
 		}
 
-		return fmt.Errorf("sqle.SelectRange: multiple errors occured: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
+		return fmt.Errorf("sqle.SelectRange: multiple errors occurred: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
 	}
 
 	err = tx.Commit()

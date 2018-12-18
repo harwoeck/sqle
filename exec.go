@@ -30,7 +30,7 @@ func (s Sqle) ExecID(query string, args ...interface{}) (lastInsertID int64, err
 		if rlbErr == nil {
 			return 0, err
 		}
-		return 0, fmt.Errorf("sqle.ExecID: multiple errors occured: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
+		return 0, fmt.Errorf("sqle.ExecID: multiple errors occurred: %q followed by tx.Rollback error: %q", err.Error(), rlbErr.Error())
 	}
 
 	err = tx.Commit()

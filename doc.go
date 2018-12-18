@@ -31,7 +31,7 @@ to this
 		return
 	}
 
-	// ExistsMessage checks wheter the id (and therefore) it's
+	// ExistsMessage checks whether the id (and therefore) it's
 	// associated value exist or not.
 	func ExistsMessage(id int64) (exists bool, err error) {
 		return s.Exists("SELECT id FROM msg WHERE id=?", id)
