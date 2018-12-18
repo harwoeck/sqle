@@ -14,6 +14,6 @@ To install SQLE, simly run:
 $ go get github.com/harwoeck/sqle
 ```
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fharwoeck%2Fsqle.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fharwoeck%2Fsqle?ref=badge_large)
