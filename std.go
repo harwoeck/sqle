@@ -21,8 +21,10 @@ type Std struct {
 }
 
 // NewStd initializes a new std
-func NewStd() Essentials {
-	return &Std{}
+func NewStd(db *sql.DB) Essentials {
+	return &Std{
+		db: db,
+	}
 }
 
 // NoContext converts `Std` to a `StdNoContext` instance, which implements the
