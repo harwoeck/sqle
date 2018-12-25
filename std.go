@@ -21,7 +21,7 @@ type Std struct {
 }
 
 // NewStd initializes a new std
-func NewStd(db *sql.DB) Essentials {
+func NewStd(db *sql.DB) *Std {
 	return &Std{
 		db: db,
 	}
