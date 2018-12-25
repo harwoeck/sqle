@@ -1,25 +1,31 @@
 package sqle
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
-// UnsafeMysqlCount counts the rows for a single column in a specified table.
-//
-// This method IS NOT SAFE AGAINST SQL-INJECTION. Use it only with trusted
-// input!
-//
-// As the method's name already clarifies, a Mysql-specific feature is used.
-// Therefore don't use this method against other databases.
-func (s Sqle) UnsafeMysqlCount(table, column string) (count int, err error) {
-	err = s.Select(fmt.Sprintf("SELECT COUNT(%s) FROM %s", column, table), []interface{}{}, []interface{}{&count})
+// MySQL extends sqle.Std with MySQL specific functions
+type MySQL struct {
+	Std *Std
+}
+
+// Exists checks whether the statement defined by the `query` and `args` would
+// return a result.
+func (s *MySQL) Exists(ctx context.Context, query string, args ...interface{}) (exists bool, err error) {
+	query = fmt.Sprintf("SELECT EXISTS (%s)", query)
+
+	err = s.Std.Select(ctx, query, args, []interface{}{&exists})
 	return
 }
 
-// MysqlExists checks whether the statement defined by the `query` and `args`
-// would return a result.
+// UnsafeCount counts the rows for a single column in a specified table.
 //
-// As the method's name already clarifies, a Mysql-specific feature is used.
-// Therefore don't use this method against other databases.
-func (s Sqle) MysqlExists(query string, args ...interface{}) (exists bool, err error) {
-	err = s.Select(fmt.Sprintf("SELECT EXISTS (%s)", query), args, []interface{}{&exists})
+// This method IS NOT SAFE AGAINST SQL-INJECTION. Use it only with trusted
+// input!
+func (s *MySQL) UnsafeCount(ctx context.Context, table, column string) (count int64, err error) {
+	query := fmt.Sprintf("SELECT COUNT(%s) FROM %s", column, table)
+
+	err = s.Std.Select(ctx, query, []interface{}{}, []interface{}{&count})
 	return
 }
