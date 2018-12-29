@@ -161,7 +161,7 @@ func (s *Std) ExecResTx(ctx context.Context, tx *sql.Tx, query string, args ...i
 	var stmt *sql.Stmt
 	stmt, err = tx.PrepareContext(ctx, query)
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 	defer func() {
 		closeErr := stmt.Close()
