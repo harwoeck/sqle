@@ -10,9 +10,12 @@ type MySQL struct {
 	Std *Std
 }
 
-// Exists checks whether the statement defined by the `query` and `args` would
-// return a result.
-func (s *MySQL) Exists(ctx context.Context, query string, args ...interface{}) (exists bool, err error) {
+// UnsafeExists checks whether the statement defined by the `query` and `args`
+// would return a result.
+//
+// This method IS NOT SAFE AGAINST SQL-INJECTION. Use it only with trusted
+// input!
+func (s *MySQL) UnsafeExists(ctx context.Context, query string, args ...interface{}) (exists bool, err error) {
 	query = fmt.Sprintf("SELECT EXISTS (%s)", query)
 
 	err = s.Std.Select(ctx, query, args, []interface{}{&exists})
