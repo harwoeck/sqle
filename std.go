@@ -20,18 +20,12 @@ type Std struct {
 	db *sql.DB
 }
 
+var _ Essentials = (*Std)(nil) // *Std implements Essentials
+
 // NewStd initializes a new std
 func NewStd(db *sql.DB) *Std {
 	return &Std{
 		db: db,
-	}
-}
-
-// NoContext converts `Std` to a `StdNoContext` instance, which implements the
-// `EssentialsNoContext` interface.
-func (s *Std) NoContext() EssentialsNoContext {
-	return &StdNoCtx{
-		std: s,
 	}
 }
 
